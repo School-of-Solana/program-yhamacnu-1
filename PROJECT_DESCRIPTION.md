@@ -2,7 +2,7 @@
 
 **Deployed Frontend URL:** https://counter-frontend-omega.vercel.app/
 
-**Solana Program ID:** HfB2cjfBFP8LBdnHLPMvV7bLswPS8TuyFY8ugDVCWLxK
+**Solana Program ID:** AzaKBxWEjJoiN4gU9hoierG8JqfqQdsGoQvVVhnii8Kt
 
 ## Project Overview
 
