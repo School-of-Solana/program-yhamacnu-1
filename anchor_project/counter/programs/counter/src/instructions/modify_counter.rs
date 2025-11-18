@@ -11,7 +11,7 @@ pub struct ModifyCounter<'info> {
     #[account(mut)]
     pub modify_author: Signer<'info>,
     #[account(
-        init,
+        init_if_needed,
         payer = modify_author,
         space = 8
         + 32 
