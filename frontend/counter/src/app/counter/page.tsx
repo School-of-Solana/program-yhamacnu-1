@@ -40,9 +40,8 @@ export default function CounterPage() {
       await w.connect();
       setConnected(true);
       setPubkey(w.publicKey as PublicKey);
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : String(err);
-      setStatus(msg);
+    } catch (err: any) {
+      setStatus(String(err.message || err));
     }
   }
 
@@ -51,8 +50,8 @@ export default function CounterPage() {
     try {
       const { program } = await getProgram();
       const [counterPda] = await findCounterPda(pubkey);
-      const account = (await program.account.counter.fetch(counterPda)) as { counter: BN };
-      setCounterValue(account.counter.toNumber());
+  const account = (await program.account.counter.fetch(counterPda)) as { counter: BN };
+  setCounterValue(account.counter.toNumber());
       setStatus("Fetched counter");
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
