@@ -5,8 +5,8 @@ package_manager = "yarn"
 resolution = true
 skip-lint = false
 
-[programs.devnet]
-counter = "HfB2cjfBFP8LBdnHLPMvV7bLswPS8TuyFY8ugDVCWLxK"
+# [programs.devnet] # use for deployment
+# counter = "HfB2cjfBFP8LBdnHLPMvV7bLswPS8TuyFY8ugDVCWLxK" # use for deployment
 
 [programs.localnet]
 counter = "HfB2cjfBFP8LBdnHLPMvV7bLswPS8TuyFY8ugDVCWLxK"
@@ -15,7 +15,8 @@ counter = "HfB2cjfBFP8LBdnHLPMvV7bLswPS8TuyFY8ugDVCWLxK"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "devnet"
+# cluster = "devnet" # use for deployment
+cluster = "localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]

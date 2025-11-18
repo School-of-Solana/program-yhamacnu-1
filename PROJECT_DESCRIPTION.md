@@ -1,79 +1,91 @@
 # Project Description
 
-**Deployed Frontend URL:** [TODO: Link to your deployed frontend]
+**Deployed Frontend URL:** https://counter-frontend-omega.vercel.app/
 
-**Solana Program ID:** [TODO: Your deployed program's public key]
+**Solana Program ID:** HfB2cjfBFP8LBdnHLPMvV7bLswPS8TuyFY8ugDVCWLxK
 
 ## Project Overview
 
 ### Description
-[TODO: Provide a comprehensive description of your dApp. Explain what it does. Be detailed about the core functionality.]
+Rudimental counter having just one variable, that can be incremented and decremented with appropriate events.
 
 ### Key Features
-[TODO: List the main features of your dApp. Be specific about what users can do.]
 
-- Feature 1: [Description]
-- Feature 2: [Description]
-- ...
+- Create counter: Create a counter with a predetermined value.
+- Increment counter value: User has the ability to increment the counter by one.
+- Decrement counter value: User has the ability to decrement the counter by one.
   
 ### How to Use the dApp
-[TODO: Provide step-by-step instructions for users to interact with your dApp]
 
 1. **Connect Wallet**
-2. **Main Action 1:** [Step-by-step instructions]
-3. **Main Action 2:** [Step-by-step instructions]
-4. ...
+2. **Create Counter**: Create a counter with an initial value.
+3. **Increment / Decrement** Users can increment and decrement the value of counter variable.
 
 ## Program Architecture
-[TODO: Describe your Solana program's architecture. Explain the main instructions, account structures, and data flow.]
+Counter uses three core instructions - for counter creation with a predefined value and corresponding increments and decrements.
 
 ### PDA Usage
-[TODO: Explain how you implemented Program Derived Addresses (PDAs) in your project. What seeds do you use and why?]
+Used for counter initiation and counter modification.
 
 **PDAs Used:**
-- PDA 1: [Purpose and description]
-- PDA 2: [Purpose and description]
+- Counter PDA: Derived from [INIT_COUNTER_SEED.as_bytes(), counter_authority.key().as_ref()].
+Purpose: Stores counter data.
+
+- CounterModifier PDA: Derived from Seeds: [MODIFY_COUNTER_SEED.as_bytes(), modify_author.key().as_ref(), counter.key().as_ref()]
+  Purpose: Tracks user modifications of the counter, i.e. increment or decrement.
 
 ### Program Instructions
 [TODO: List and describe all the instructions in your Solana program]
 
 **Instructions Implemented:**
-- Instruction 1: [Description of what it does]
-- Instruction 2: [Description of what it does]
-- ...
+- Initialize Counter: Creates a new counter PDA and stores a value in the counter variable.
+- Increment : Allows a user to increment the counter.
+- Decrement : Allows a user to cdcrement the counter.
 
 ### Account Structure
-[TODO: Describe your main account structures and their purposes]
 
 ```rust
-// Example account structure (replace with your actual structs)
 #[account]
-pub struct YourAccountName {
-    // Describe each field
+#[derive(InitSpace)]
+pub struct Counter {
+    pub counter_authority: Pubkey,
+    pub counter: u64,
+    pub bump: u8,
+}
+
+#[account]
+#[derive(InitSpace)]
+pub struct CounterModifier {
+    pub modification_author: Pubkey,
+    pub modification: ModType,
+    pub bump: u8,
 }
 ```
 
 ## Testing
 
 ### Test Coverage
-[TODO: Describe your testing approach and what scenarios you covered]
+This is a rudimental test coverage.
 
 **Happy Path Tests:**
-- Test 1: [Description]
-- Test 2: [Description]
-- ...
+- Initialize Counter: Creates a new counter account with correct initial value (665ms)
+- Increment Counter: Increases counter value by 1
+- Decrement Counter: Decreases counter value by 1
 
 **Unhappy Path Tests:**
-- Test 1: [Description of error scenario]
-- Test 2: [Description of error scenario]
-- ...
+- Initialize Duplicate: Fails when counter already exists
+- Decrement Underflow: Fails when trying to decrement below zero
+- Increment Overflow: Fails when trying to increment beyond u64::MAX
+- Account Not Found: Fails when operating on non-existent counter
 
 ### Running Tests
 ```bash
 # Commands to run your tests
+cd anchor_project/counter
+yarn install
 anchor test
 ```
 
 ### Additional Notes for Evaluators
 
-[TODO: Add any specific notes or context that would help evaluators understand your project better]
+My first solana program and dapp for that matter. Frontend was a bigger challange. Commented out the Anchor.toml sections that I used for the devnet deployment and marked them as "use for deployment"
