@@ -7,7 +7,7 @@ pub mod events;
 
 use instructions::*;
 
-declare_id!("HfB2cjfBFP8LBdnHLPMvV7bLswPS8TuyFY8ugDVCWLxK");
+declare_id!("AzaKBxWEjJoiN4gU9hoierG8JqfqQdsGoQvVVhnii8Kt");
 
 #[program]
 pub mod counter {
